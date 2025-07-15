@@ -323,6 +323,10 @@ st.markdown("""
         font-size: 14px !important;
     }
 
+    .stSelectbox * {
+        cursor: pointer !important;
+    }
+
     /* Garante que todos os botões tenham cursor pointer */
     .stButton > button,
     button,
