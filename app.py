@@ -15,7 +15,7 @@ if "GOOGLE_API_KEY" not in st.secrets and "GOOGLE_API_KEY" not in st.session_sta
     if api_key:
         st.session_state["GOOGLE_API_KEY"] = api_key
         genai.configure(api_key=api_key)
-        # st.experimental_rerun()  # Remova esta linha
+        st.rerun()
     st.stop()
 else:
     GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"] if "GOOGLE_API_KEY" in st.secrets else st.session_state.get("GOOGLE_API_KEY")
@@ -334,7 +334,7 @@ if st.session_state.current_step == 0:
     if st.button("Próximo"):
         st.session_state.frequencia = frequencia
         st.session_state.current_step = 1
-        st.experimental_rerun()
+        st.rerun()
 
 elif st.session_state.current_step == 1:
     st.markdown("### 💪 Quais são seus exercícios favoritos?")
@@ -342,7 +342,7 @@ elif st.session_state.current_step == 1:
     if st.button("Próximo"):
         st.session_state.exercicios_favoritos = exercicios
         st.session_state.current_step = 2
-        st.experimental_rerun()
+        st.rerun()
 
 elif st.session_state.current_step == 2:
     st.markdown("### 🎯 Qual é seu objetivo de treino?")
@@ -351,7 +351,7 @@ elif st.session_state.current_step == 2:
     if st.button("Próximo"):
         st.session_state.tipo_treino = tipo_treino
         st.session_state.current_step = 3
-        st.experimental_rerun()
+        st.rerun()
 
 elif st.session_state.current_step == 3:
     st.markdown("### 📈 Quais pontos você quer melhorar?")
@@ -359,7 +359,7 @@ elif st.session_state.current_step == 3:
     if st.button("Próximo"):
         st.session_state.pontos_melhorar = pontos_melhorar
         st.session_state.current_step = 4
-        st.experimental_rerun()
+        st.rerun()
 
 elif st.session_state.current_step == 4:
     st.markdown("### 🤖 Gerar Plano de Treino")
@@ -381,4 +381,4 @@ elif st.session_state.current_step == 4:
             
     if st.button("Recomeçar"):
         st.session_state.current_step = 0
-        st.experimental_rerun() 
+        st.rerun() 
