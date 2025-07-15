@@ -1,6 +1,7 @@
 import streamlit as st
 import google.generativeai as genai
 import json
+import re
 
 # Configuração da página
 st.set_page_config(
@@ -288,6 +289,52 @@ st.markdown("""
         font-size: 1.1rem;
         text-shadow: 0 0 10px #00ffff;
     }
+
+    /* Corrige o selectbox para não parecer dois botões */
+    .stSelectbox {
+        width: 100% !important;
+        min-width: 250px !important;
+    }
+
+    .stSelectbox > div {
+        border: 2px solid #00ffff !important;
+        border-radius: 8px !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3) !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .stSelectbox > div > div {
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .stSelectbox > div > div > div {
+        min-width: 0 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        background: transparent !important;
+        color: #00ffff !important;
+        font-size: 14px !important;
+    }
+
+    /* Garante que todos os botões tenham cursor pointer */
+    .stButton > button,
+    button,
+    [role="button"],
+    .stSelectbox > div {
+        cursor: pointer !important;
+    }
+
+    /* Garante cursor pointer em todas as partes do selectbox */
+    .stSelectbox * {
+        cursor: pointer !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -404,6 +451,8 @@ elif st.session_state.current_step == 4:
             </div>
             """, unsafe_allow_html=True)
             plano = gerar_plano_treino(dados)
+            # Remove tags </div> soltas no final
+            plano = re.sub(r'(</div>\s*)+$', '', plano)
             st.markdown(f"""
             <div class="ai-content">
                 {plano}
