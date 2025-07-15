@@ -263,6 +263,31 @@ st.markdown("""
             max-width: 100%;
         }
     }
+
+    /* Spinner de robô personalizado */
+    .custom-robot-spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0;
+    }
+
+    .custom-robot-spinner .robot-emoji {
+        font-size: 48px;
+        animation: robot-bounce 1s infinite alternate;
+    }
+
+    @keyframes robot-bounce {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-15px); }
+    }
+
+    .custom-robot-spinner .text {
+        color: #00ffff;
+        margin-top: 10px;
+        font-size: 1.1rem;
+        text-shadow: 0 0 10px #00ffff;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -371,7 +396,13 @@ elif st.session_state.current_step == 4:
     }
     
     if st.button("Gerar"):
-        with st.spinner("A IA está gerando seu plano personalizado..."):
+        with st.empty():
+            st.markdown("""
+            <div class="custom-robot-spinner">
+                <span class="robot-emoji">🤖</span>
+                <span class="text">A IA está gerando seu plano personalizado...</span>
+            </div>
+            """, unsafe_allow_html=True)
             plano = gerar_plano_treino(dados)
             st.markdown(f"""
             <div class="ai-content">
