@@ -15,7 +15,7 @@ if "GOOGLE_API_KEY" not in st.secrets and "GOOGLE_API_KEY" not in st.session_sta
     if api_key:
         st.session_state["GOOGLE_API_KEY"] = api_key
         genai.configure(api_key=api_key)
-        st.experimental_rerun()
+        # st.experimental_rerun()  # Remova esta linha
     st.stop()
 else:
     GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"] if "GOOGLE_API_KEY" in st.secrets else st.session_state.get("GOOGLE_API_KEY")
